@@ -1,0 +1,16 @@
+"TVUMJRefreshHeaderIdleText" = "Pull down to refresh";
+"TVUMJRefreshHeaderPullingText" = "Release to refresh";
+"TVUMJRefreshHeaderRefreshingText" = "Loading...";
+
+"TVUMJRefreshAutoFooterIdleText" = "Tap or pull up to load more";
+"TVUMJRefreshAutoFooterRefreshingText" = "Loading...";
+"TVUMJRefreshAutoFooterNoMoreDataText" = "No more data";
+
+"TVUMJRefreshBackFooterIdleText" = "Pull up to load more";
+"TVUMJRefreshBackFooterPullingText" = "Release to load more.";
+"TVUMJRefreshBackFooterRefreshingText" = "Loading...";
+"TVUMJRefreshBackFooterNoMoreDataText" = "No more data";
+
+"TVUMJRefreshHeaderLastTimeText" = "Last updated: ";
+"TVUMJRefreshHeaderDateTodayText" = "Today";
+"TVUMJRefreshHeaderNoneLastDateText" = "No record";

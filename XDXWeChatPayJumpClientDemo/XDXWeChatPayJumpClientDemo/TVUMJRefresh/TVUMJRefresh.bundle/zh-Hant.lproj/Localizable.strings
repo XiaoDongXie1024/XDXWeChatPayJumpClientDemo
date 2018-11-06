@@ -1,0 +1,16 @@
+"TVUMJRefreshHeaderIdleText" = "下拉可以刷新";
+"TVUMJRefreshHeaderPullingText" = "鬆開立即刷新";
+"TVUMJRefreshHeaderRefreshingText" = "正在刷新數據中...";
+
+"TVUMJRefreshAutoFooterIdleText" = "點擊或上拉加載更多";
+"TVUMJRefreshAutoFooterRefreshingText" = "正在加載更多的數據...";
+"TVUMJRefreshAutoFooterNoMoreDataText" = "已經全部加載完畢";
+
+"TVUMJRefreshBackFooterIdleText" = "上拉可以加載更多";
+"TVUMJRefreshBackFooterPullingText" = "鬆開立即加載更多";
+"TVUMJRefreshBackFooterRefreshingText" = "正在加載更多的數據...";
+"TVUMJRefreshBackFooterNoMoreDataText" = "已經全部加載完畢";
+
+"TVUMJRefreshHeaderLastTimeText" = "最後更新：";
+"TVUMJRefreshHeaderDateTodayText" = "今天";
+"TVUMJRefreshHeaderNoneLastDateText" = "無記錄";
