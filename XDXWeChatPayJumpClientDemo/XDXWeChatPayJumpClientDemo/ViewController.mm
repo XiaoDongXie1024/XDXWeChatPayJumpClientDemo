@@ -19,11 +19,6 @@
         简书地址     :
         博客地址     :
         掘金地址     :
- 
-
- 
-    本例包含WKWebview多个属性：与JS交互，上拉刷新，微信支付，请自行选择需要的功能
- 
  */
 
 
@@ -40,7 +35,7 @@ static const char *ModuleName = "XDXTestVC";
 
 static const NSString *CompanyFirstDomainByWeChatRegister = @"xdx.cn";
 
-@interface ViewController ()<WKNavigationDelegate, WKScriptMessageHandler>
+@interface ViewController ()<WKNavigationDelegate>
 
 @property (nonatomic, strong) WKWebView         *webView;
 @property (nonatomic, strong) UIProgressView    *progressView;
@@ -96,8 +91,6 @@ static const NSString *CompanyFirstDomainByWeChatRegister = @"xdx.cn";
     self.webView.navigationDelegate = self;
     
     [self initProgressView];
-    // Register event to interact with JS.
-    [[_webView configuration].userContentController addScriptMessageHandler:self name:@"getMessage"];
     
     // Listen the web load condition
     [self.webView addObserver:self forKeyPath:@"estimatedProgress" options:NSKeyValueObservingOptionNew context:nil];
@@ -169,11 +162,6 @@ static const NSString *CompanyFirstDomainByWeChatRegister = @"xdx.cn";
 }
 
 #pragma mark - Delegate
-#pragma mark WKScriptMessageHandler Delegate
-- (void)userContentController:(WKUserContentController *)userContentController didReceiveScriptMessage:(WKScriptMessage *)message {
-    log4cplus_info("XDX_LOG", "%s - %s receive the message name is %s, message content is %s.", ModuleName, __func__,[NSString stringWithFormat:@"%@",message.name].UTF8String, [NSString stringWithFormat:@"%@",message.body].UTF8String);
-}
-
 #pragma mark - WKNavigation Delegate
 - (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
     
@@ -304,7 +292,6 @@ static const NSString *CompanyFirstDomainByWeChatRegister = @"xdx.cn";
 
 #pragma mark - Dealloc
 - (void)dealloc {
-    [[_webView configuration].userContentController removeScriptMessageHandlerForName:@"getMessage"];
 }
 
 
