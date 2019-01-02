@@ -201,16 +201,19 @@ static const NSString *CompanyFirstDomainByWeChatRegister = @"xdx.cn";
     // Judge is whether to jump to other app.
     if (![scheme isEqualToString:@"https"] && ![scheme isEqualToString:@"http"]) {
         decisionHandler(WKNavigationActionPolicyCancel);
-        if ([scheme isEqualToString:[NSString stringWithFormat:@"xdx.%@",CompanyFirstDomainByWeChatRegister]]) {
+        if ([scheme isEqualToString:@"weixin"]) {
+            // The var endPayRedirectURL was our saved origin url's redirect address. We need to load it when we return from wechat client.
+            if (endPayRedirectURL) {
+                [webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:endPayRedirectURL] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:XDX_URL_TIMEOUT]];
+            }
+        }else if ([scheme isEqualToString:[NSString stringWithFormat:@"xdx.%@",CompanyFirstDomainByWeChatRegister]]) {
             
         }
         
-        // The var endPayRedirectURL was our saved origin url's redirect address. We need to load it when we return from wechat client.
-        if (endPayRedirectURL) {
-            [webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:endPayRedirectURL] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:XDX_URL_TIMEOUT]];
+        BOOL canOpen = [[UIApplication sharedApplication] canOpenURL:request.URL];
+        if (canOpen) {
+            [[UIApplication sharedApplication] openURL:request.URL];
         }
-        
-        [[UIApplication sharedApplication] openURL:request.URL];
         return;
     }
     
