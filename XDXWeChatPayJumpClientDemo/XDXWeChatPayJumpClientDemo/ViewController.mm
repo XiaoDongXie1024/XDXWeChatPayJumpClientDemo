@@ -181,10 +181,12 @@ static const NSString *CompanyFirstDomainByWeChatRegister = @"xdx.cn";
         
         // 1. If the url contain "redirect_url" : We need to remember it to use our scheme replace it.
         // 2. If the url not contain "redirect_url" , We should add it so that we will could jump to our app.
+        //  Note : 2. if the redirect_url is not last string, you should use correct strategy, because the redirect_url's value may contain some "&" special character so that my cut method may be incorrect.
         NSString *redirectUrl = nil;
         if ([absoluteString containsString:@"redirect_url="]) {
-            endPayRedirectURL = [self getParamValueByName:@"redirect_url" URLString:absoluteString];
-            redirectUrl = [self modityParamValueByName:@"redirect_url" newValue:[NSString stringWithFormat:@"xdx.%@://",CompanyFirstDomainByWeChatRegister] URLString:absoluteString];
+            NSRange redirectRange = [absoluteString rangeOfString:@"redirect_url"];
+            endPayRedirectURL =  [absoluteString substringFromIndex:redirectRange.location+redirectRange.length+1];
+            redirectUrl = [[absoluteString substringToIndex:redirectRange.location] stringByAppendingString:[NSString stringWithFormat:@"redirect_url=xdx.%@://",CompanyFirstDomainByWeChatRegister]];
         }else {
             redirectUrl = [absoluteString stringByAppendingString:[NSString stringWithFormat:@"&redirect_url=xdx.%@://",CompanyFirstDomainByWeChatRegister]];
         }
