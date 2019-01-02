@@ -167,7 +167,8 @@ static const NSString *CompanyFirstDomainByWeChatRegister = @"xdx.cn";
     
     NSURLRequest *request        = navigationAction.request;
     NSString     *scheme         = [request.URL scheme];
-    NSString     *absoluteString = navigationAction.request.URL.absoluteString;
+    // decode for all URL to avoid url contains some special character so that it wasn't load.
+    NSString     *absoluteString = [navigationAction.request.URL.absoluteString stringByRemovingPercentEncoding];
     NSLog(@"Current URL is %@",absoluteString);
     
     static NSString *endPayRedirectURL = nil;
@@ -204,8 +205,7 @@ static const NSString *CompanyFirstDomainByWeChatRegister = @"xdx.cn";
         
         // The var endPayRedirectURL was our saved origin url's redirect address. We need to load it when we return from wechat client.
         if (endPayRedirectURL) {
-            NSString *decodeURL = [endPayRedirectURL stringByRemovingPercentEncoding];
-            [webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:decodeURL] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:XDX_URL_TIMEOUT]];
+            [webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:endPayRedirectURL] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:XDX_URL_TIMEOUT]];
         }
         
         [[UIApplication sharedApplication] openURL:request.URL];
